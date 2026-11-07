@@ -1,0 +1,18 @@
+- Servers:
+    - Proxmox:
+        icon: proxmox.png
+        href: https://192.168.0.200:8006
+        description: The laptop server
+    - Portainer:
+        icon: portainer.png
+        href: https://192.168.0.201:9443
+        description: Manage Docker apps
+- Network:
+    - AdGuard Home:
+        icon: adguard-home.png
+        href: http://192.168.0.201:8080
+        description: Ad blocking
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: http://192.168.0.201:3001
+        description: Monitoring and alerts
