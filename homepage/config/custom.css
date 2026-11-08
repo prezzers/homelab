@@ -1,0 +1,168 @@
+/* ──────────────────────────────────────────────────────────────
+   homelab dashboard · styled to match CoreDump
+   Same tokens as coredump/app/globals.css: change them here.
+   ────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --bg: #0b0d10;
+  --panel: #12151a;
+  --panel-2: #191d23;
+  --line: #242a32;
+  --line-2: #343c46;
+  --text: #e4e8eb;
+  --muted: #929ba5;
+  --accent: #c6f24e;
+  --accent-ink: #12160a;
+  --danger: #ff7b6e;
+  --warn: #ffb84d;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+
+/* Homepage's own palette, re-pointed at CoreDump's greys (rgb triplets) */
+html.dark, html {
+  --color-50: 228 232 235;
+  --color-100: 228 232 235;
+  --color-200: 200 206 211;
+  --color-300: 146 155 165;
+  --color-400: 146 155 165;
+  --color-500: 52 60 70;
+  --color-600: 36 42 50;
+  --color-700: 25 29 35;
+  --color-800: 18 21 26;
+  --color-900: 11 13 16;
+  --color-950: 11 13 16;
+}
+
+html, body, #__next, #page_wrapper {
+  background: var(--bg) !important;
+  background-image: none !important;
+  color: var(--text);
+  font-family: var(--sans) !important;
+  -webkit-font-smoothing: antialiased;
+}
+body { padding-bottom: 36px; }               /* room for the status bar */
+::selection { background: var(--accent); color: var(--accent-ink); }
+* { scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; }
+a:focus-visible, button:focus-visible { outline: 1px solid var(--accent); outline-offset: 1px; }
+
+/* Everything square, like CoreDump's panes */
+*, *::before, *::after { border-radius: 0 !important; }
+
+/* Group headings → pane titles: mono, lowercase, accent marker */
+.service-group-name, .bookmark-group-name,
+.services-group h2, .bookmark-group h2 {
+  font: 500 12px/1.4 var(--mono) !important;
+  text-transform: lowercase !important;
+  letter-spacing: 0 !important;
+  color: var(--muted) !important;
+}
+.service-group-name::before, .bookmark-group-name::before,
+.services-group h2::before, .bookmark-group h2::before {
+  content: "▸ ";
+  color: var(--accent);
+}
+
+/* Cards → panes */
+.service-card {
+  background: var(--panel) !important;
+  border: 1px solid var(--line-2) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  transition: border-color .1s, background .1s;
+}
+.service-card:hover {
+  border-color: var(--accent) !important;
+  background: var(--panel-2) !important;
+}
+.service-name, .service-title {
+  font: 500 14px/1.4 var(--mono) !important;
+  color: var(--text) !important;
+}
+.service-card:hover .service-name { color: var(--accent) !important; }
+.service-description {
+  font: 12px/1.4 var(--sans) !important;
+  color: var(--muted) !important;
+}
+
+/* Widget blocks: mono numbers, quiet labels */
+.service-block {
+  background: var(--bg) !important;
+  border: 1px solid var(--line) !important;
+}
+.service-block > div:first-child,
+.service-block .font-thin,
+.service-block .font-bold {
+  font-family: var(--mono) !important;
+  font-variant-numeric: tabular-nums;
+  color: var(--text) !important;
+}
+.service-block > div:last-child,
+.service-block .uppercase {
+  font: 11px var(--mono) !important;
+  text-transform: lowercase !important;
+  color: var(--muted) !important;
+}
+
+/* Status dots → CoreDump colours */
+.bg-emerald-500, .bg-green-500, .bg-emerald-400 { background-color: var(--accent) !important; }
+.bg-rose-500, .bg-red-500 { background-color: var(--danger) !important; }
+.bg-orange-400, .bg-amber-500, .bg-yellow-500 { background-color: var(--warn) !important; }
+.text-emerald-500, .text-green-500 { color: var(--accent) !important; }
+
+/* Top information widgets */
+#information-widgets, #information-widgets * { font-family: var(--mono) !important; }
+#information-widgets .bg-theme-500, .resource-usage div[class*="bg-theme"] {
+  background-color: var(--accent) !important;          /* usage bars in lime */
+}
+
+/* Bookmarks */
+.bookmark-text, .bookmark a > div {
+  background: var(--panel) !important;
+  border: 1px solid var(--line-2) !important;
+  font: 12.5px var(--mono) !important;
+}
+.bookmark a:hover > div { border-color: var(--accent) !important; color: var(--accent) !important; }
+
+/* Search box */
+input[type="text"], input[type="search"] {
+  background: var(--bg) !important;
+  border: 1px solid var(--line-2) !important;
+  font-family: var(--mono) !important;
+}
+input[type="text"]:focus, input[type="search"]:focus { border-color: var(--accent) !important; outline: none; }
+
+/* ── tmux-style status bar (built by custom.js) ── */
+#lab-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  display: flex; align-items: stretch; height: 28px;
+  background: var(--panel); border-top: 1px solid var(--line-2);
+  font: 12px var(--mono); color: var(--muted);
+}
+#lab-bar .brand {
+  display: flex; align-items: center; gap: 6px; padding: 0 12px;
+  background: var(--accent); color: var(--accent-ink); font-weight: 700; white-space: nowrap;
+}
+#lab-bar .list { display: flex; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+#lab-bar .win {
+  position: relative; isolation: isolate; display: flex; align-items: center; gap: 6px;
+  padding: 0 10px; color: var(--muted); white-space: nowrap; cursor: pointer; transition: color .12s;
+}
+#lab-bar .win::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--panel-2);
+  box-shadow: inset 2px 0 0 var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform .14s ease-out;
+}
+#lab-bar .win:hover { color: var(--text); }
+#lab-bar .win:hover::before { transform: scaleX(1); }
+#lab-bar .key { color: var(--accent); }
+#lab-bar .right { display: flex; align-items: center; gap: 14px; padding: 0 12px; white-space: nowrap; }
+#lab-bar .right .clock { color: var(--text); }
+
+@media (max-width: 600px) {
+  #lab-bar .list { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-card, #lab-bar .win, #lab-bar .win::before { transition: none; }
+}

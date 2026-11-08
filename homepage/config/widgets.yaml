@@ -1,12 +1,30 @@
----
-# For configuration options and examples, please see:
-# https://gethomepage.dev/configs/info-widgets/
+# Top bar
+- greeting:
+    text_size: xl
+    text: prezzers homelab
 
 - resources:
+    label: docker VM
     cpu: true
     memory: true
     disk: /
+    expanded: true
+
+- datetime:
+    text_size: md
+    format:
+      dateStyle: medium
+      timeStyle: short
+      hour12: false
 
 - search:
     provider: duckduckgo
     target: _blank
+
+# Weather: add your town's coordinates, then uncomment (kept out of the public repo by default)
+# - openmeteo:
+#     label: Home
+#     latitude: 00.000
+#     longitude: 0.000
+#     units: metric
+#     cache: 5

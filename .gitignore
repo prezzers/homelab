@@ -1,2 +1,3 @@
 uptime-kuma/data/
 homepage/config/logs/
+homepage/.env

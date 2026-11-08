@@ -3,16 +3,69 @@
         icon: proxmox.png
         href: https://192.168.0.200:8006
         description: The laptop server
+        widget:
+          type: proxmox
+          url: https://192.168.0.200:8006
+          username: "{{HOMEPAGE_VAR_PROXMOX_TOKEN_ID}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_TOKEN_SECRET}}"
+          node: pve
     - Portainer:
         icon: portainer.png
         href: https://192.168.0.201:9443
-        description: Manage Docker apps
+        description: Docker containers
+        server: docker-vm
+        container: portainer
+        widget:
+          type: portainer
+          url: https://192.168.0.201:9443
+          env: "{{HOMEPAGE_VAR_PORTAINER_ENV}}"
+          key: "{{HOMEPAGE_VAR_PORTAINER_KEY}}"
+    - Coolify:
+        icon: coolify.png
+        href: https://coolify.prezzers.dev
+        description: Builds and deploys my apps
+        siteMonitor: http://192.168.0.202:8000
+
 - Network:
     - AdGuard Home:
         icon: adguard-home.png
         href: http://192.168.0.201:8080
-        description: Ad blocking
+        description: Ad blocking for every device
+        server: docker-vm
+        container: adguardhome
+        widget:
+          type: adguard
+          url: http://192.168.0.201:8080
+          username: "{{HOMEPAGE_VAR_ADGUARD_USER}}"
+          password: "{{HOMEPAGE_VAR_ADGUARD_PASS}}"
+    - Cloudflare Tunnel:
+        icon: cloudflare.png
+        href: https://one.dash.cloudflare.com
+        description: Public traffic into the lab
+        widget:
+          type: cloudflared
+          accountid: "{{HOMEPAGE_VAR_CF_ACCOUNT_ID}}"
+          tunnelid: "{{HOMEPAGE_VAR_CF_TUNNEL_ID}}"
+          key: "{{HOMEPAGE_VAR_CF_API_TOKEN}}"
     - Uptime Kuma:
         icon: uptime-kuma.png
         href: http://192.168.0.201:3001
         description: Monitoring and alerts
+        server: docker-vm
+        container: uptime-kuma
+        widget:
+          type: uptimekuma
+          url: http://192.168.0.201:3001
+          slug: homelab
+
+- Apps:
+    - CoreDump:
+        icon: mdi-brain
+        href: https://coredump.prezzers.dev
+        description: Notes, tasks and uni
+        siteMonitor: https://coredump.prezzers.dev
+    - prezzers.dev:
+        icon: mdi-web
+        href: https://prezzers.dev
+        description: Website and blog
+        siteMonitor: https://prezzers.dev

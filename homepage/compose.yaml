@@ -7,5 +7,8 @@ services:
       - "3002:3000"
     environment:
       HOMEPAGE_ALLOWED_HOSTS: 192.168.0.201:3002,100.90.126.16:3002
+    env_file:
+      - .env            # API keys and passwords – never committed (see .env.example)
     volumes:
       - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro   # lets cards show container status

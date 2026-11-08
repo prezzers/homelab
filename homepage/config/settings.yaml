@@ -1,7 +1,25 @@
----
-# For configuration options and examples, please see:
-# https://gethomepage.dev/configs/settings/
+title: homelab
+description: Status of everything running at home
+theme: dark
+color: zinc
+headerStyle: clean
+statusStyle: dot
+hideVersion: true
+target: _blank
+cardBlur: none
+useEqualHeights: true
 
-providers:
-  openweathermap: openweathermapapikey
-  weatherapi: weatherapiapikey
+layout:
+  Servers:
+    style: row
+    columns: 3
+  Network:
+    style: row
+    columns: 3
+  Apps:
+    style: row
+    columns: 3
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: false
